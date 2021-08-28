@@ -13,11 +13,11 @@ open class ResponseHandler {
     suspend fun <T : Any> handle(block: suspend () -> StandardResponse<T>): Response<T> {
         return try {
             val response: StandardResponse<T> = block.invoke()
-            when (response.statusCode) {
+            when (response.status.error_code) {
                 0 -> handleSuccess(response)
                 else -> handleException(
                     FeedApiError(
-                        response.statusCode, response.message, response.payload
+                        response.status.error_code, response.status.message, response.result
                     )
                 )
             }
@@ -27,7 +27,7 @@ open class ResponseHandler {
     }
 
     private fun <T : Any> handleSuccess(data: StandardResponse<T>): Response<T> {
-        return Response.success(data.payload)
+        return Response.success(data.result)
     }
 
     private fun <T : Any> handleException(e: Exception): Response<T> {

@@ -46,7 +46,7 @@ fun providesMoshiConverter(): Moshi =
         .add(ArrayListMoshiAdapter()).build()
 
 fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit =
-    Retrofit.Builder().baseUrl("https://gofit.fitness").client(okHttpClient)
+    Retrofit.Builder().baseUrl("https://devfitser.com").client(okHttpClient)
         .addConverterFactory(MoshiConverterFactory.create(moshi)).build()
 
 fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =

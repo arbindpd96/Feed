@@ -12,9 +12,5 @@ data class Response<out T>(val status: Status, val payload: T?, val message: Str
         fun <T> error(code: Int, msg: String, payload: T?): Response<T> {
             return Response(Status.ERROR, payload, msg, code)
         }
-
-        fun <T> loading(data: T?): Response<T> {
-            return Response(Status.LOADING, data, null, null)
-        }
     }
 }
