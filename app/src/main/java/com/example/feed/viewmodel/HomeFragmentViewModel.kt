@@ -4,17 +4,19 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.feed.modals.request.FeedRequest
+import com.example.feed.modals.response.FeedResponse
 import com.example.feed.networking.Response
 import com.example.feed.repository.Feedrepository
 import kotlinx.coroutines.launch
 
 class HomeFragmentViewModel(application : Application , private val feedrepository: Feedrepository) : AndroidViewModel(application) {
 
-    private var feedResponse = MutableLiveData<Response<String>>()
+     var feedResponse = MutableLiveData<Response<FeedResponse>>()
 
-    fun getFeedData(){
+    fun getFeedData(feedRequest: FeedRequest){
         viewModelScope.launch {
-           feedResponse.postValue( feedrepository.getFeedData() )
+           feedResponse.postValue( feedrepository.getFeedData(feedRequest) )
         }
     }
 }

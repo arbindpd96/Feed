@@ -4,7 +4,6 @@ apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.gms.google-services'
 
 androidExtensions {
     experimental = true
@@ -35,6 +34,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    packagingOptions {
+        exclude 'META-INF/*'
     }
 }
 
@@ -70,15 +72,18 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.71828'
     //koin
-    def koin_version = '3.1.2'
-    api "io.insert-koin:koin-android-viewmodel:$koin_version"
-    api "io.insert-koin:koin-core:$koin_version"
-    api "io.insert-koin:koin-core-ext:$koin_version"
-    api "io.insert-koin:koin-android:$koin_version"
-    api "io.insert-koin:koin-core:$koin_version"
-    testImplementation "io.insert-koin:koin-test:$koin_version"
-    testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
+    def koin_version = '3.0.1-beta-2'
+// Koin main features for Android (Scope,ViewModel ...)
+    implementation "io.insert-koin:koin-android:${koin_version}"
+// Koin Android - experimental builder extensions
+    implementation "io.insert-koin:koin-android-ext:${koin_version}"
+// Koin for Jetpack WorkManager
+    implementation "io.insert-koin:koin-androidx-workmanager:${koin_version}"
+
+    //Picasso
+    implementation("com.squareup.picasso:picasso:2.71828")
 
 }
+
 
 
