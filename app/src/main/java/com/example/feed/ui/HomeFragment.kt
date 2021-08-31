@@ -1,6 +1,7 @@
 package com.example.feed.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,7 @@ class HomeFragment : Fragment() {
         viewModel.getFeedData(getFeedReq())
 
         viewModel.feedResponse.observe(viewLifecycleOwner) {
+            Log.d("Mango","resp -> ${it.message},${it.status} , ${it.code} , ${it.payload}")
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.payload?.data?.size ?: 0 > 0) setUpViewPager(it.payload?.data?.get(0))

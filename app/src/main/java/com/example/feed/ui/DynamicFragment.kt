@@ -25,7 +25,7 @@ class DynamicFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        item_list.adapter = adapter
+        item_list?.adapter = adapter
         return inflater.inflate(R.layout.fragment_dynamic, container, false)
     }
 
