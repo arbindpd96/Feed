@@ -52,7 +52,7 @@
         app:tabIndicatorColor="#C145AC"
         app:tabMode="scrollable"
         app:tabSelectedTextColor="#ffffff"
-        app:tabTextColor="#9e91c1"
+        app:tabTextColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/view"/>
 
 
