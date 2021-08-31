@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.feed.R
 import com.example.feed.adapter.TabAdapter
 import com.example.feed.modals.request.FeedRequest
-import com.example.feed.modals.response.Data
+import com.example.feed.modals.response.FeedResponse
 import com.example.feed.networking.Status
 import com.example.feed.viewmodel.HomeFragmentViewModel
 import com.google.android.material.tabs.TabLayout
@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
             Log.d("Mango","resp -> ${it.message},${it.status} , ${it.code} , ${it.payload}")
             when (it.status) {
                 Status.SUCCESS -> {
-                    if (it.payload?.data?.size ?: 0 > 0) setUpViewPager(it.payload?.data?.get(0))
+                    if (it.payload?.data?.size ?: 0 > 0) setUpViewPager(it.payload)
                 }
                 Status.ERROR -> Toast.makeText(
                     context ?: return@observe, "${it.message}", Toast.LENGTH_LONG
@@ -56,13 +56,14 @@ class HomeFragment : Fragment() {
         store_id = "3", u_id = "", access_type = "1", source = "mob"
     )
 
-    private fun setUpViewPager(data: Data?) {
-        data ?: return
-        for (i in 0..data.items.size) {
-            tab_mode.addTab(tab_mode.newTab().setText(data.cat_name));
+    private fun setUpViewPager(resp: FeedResponse?) {
+        resp ?: return
+        Log.d("Mango","size ${resp.data.size}")
+        for (i in 0 until resp.data.size) {
+            tab_mode.addTab(tab_mode.newTab().setText(resp.data[i].cat_name));
         }
 
-        val adapter = TabAdapter(fragmentManager, tab_mode.tabCount,data)
+        val adapter = TabAdapter(fragmentManager, tab_mode.tabCount,resp.data)
         viewpager.adapter = adapter;
         viewpager.offscreenPageLimit = 1;
         viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_mode));
