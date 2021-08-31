@@ -27,7 +27,7 @@ open class ResponseHandler {
     }
 
     private fun <T : Any> handleSuccess(data: StandardResponse<T>): Response<T> {
-        return Response.success(data.result)
+        return Response.success(data.result,data.status.error_code,data.status.message,)
     }
 
     private fun <T : Any> handleException(e: Exception): Response<T> {
