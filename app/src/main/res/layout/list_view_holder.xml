@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/item_pic"
@@ -88,7 +88,7 @@
             android:layout_weight="1"
             android:background="#BC79B0"
             android:gravity="center"
-            android:text="1"
+            android:text="0"
             android:textSize="18sp"
             android:textStyle="bold" />
 

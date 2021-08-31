@@ -13,8 +13,9 @@ import kotlinx.android.synthetic.main.fragment_dynamic.*
 
 
 class DynamicFragment : Fragment() {
-    val adapter = ItemsAdapter()
-    var data : Data? = null
+    var adapter: ItemsAdapter? = null
+    var data: Data? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,24 +23,26 @@ class DynamicFragment : Fragment() {
             data = it.getParcelable("item")
         }
     }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        item_list?.adapter = adapter
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dynamic, container, false)
     }
 
     companion object {
-        fun addfrag(item : Data): DynamicFragment {
+        fun addfrag(item: Data): DynamicFragment {
             val fragment = DynamicFragment()
             val args = Bundle()
-            args.putParcelable("item" , item)
+            args.putParcelable("item", item)
             fragment.arguments = args
             return fragment
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if(data?.items?.isNotEmpty() == true)  adapter.list = data?.items as ArrayList<Items>
+        adapter = ItemsAdapter()
+        item_list.adapter = adapter
+        if (data?.items?.isNotEmpty() == true) {
+            adapter?.itemList = data?.items as ArrayList<Items>
+        }
     }
 }
