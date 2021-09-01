@@ -4,7 +4,7 @@
 Components Used in this projects are 
 
 - MVVM
-- Dependency Injection
+- Dependency Injection(Koin)
 - Retrofit for networking 
 
 Language Used - Kotlin
